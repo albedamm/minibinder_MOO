@@ -1,6 +1,7 @@
 import proteusAI as pai
 import pandas as pd
 import time
+from uncertainty_analysis import UncertaintyAnalyzer 
 
 # Start total execution timer
 total_start_time = time.time()
@@ -79,9 +80,19 @@ for y_col in y_cols[1:]:
     print(f"Predictions for {y_col} completed in {time.time() - start_time:.2f} seconds.")
 
 # Save the combined predictions to a CSV file
-start_time = time.time()
-search_out.to_csv('bo_results/blosum_ridge_ucb/proteus_blosum_ridge_ucb_pareto_3.csv', index=False)
-print(f"All predictions saved to CSV in {time.time() - start_time:.2f} seconds.")
+final_output_file = 'bo_results/blosum_ridge_ucb/proteus_blosum_ridge_ucb_pareto_3.csv'
+search_out.to_csv(final_output_file, index=False)
+
+# Analyze the top 300 rows by uncertainty using UncertaintyAnalyzer
+print("Starting uncertainty analysis for the top 300 rows...")
+analyzer = UncertaintyAnalyzer(
+    input_file=final_output_file,
+    output_file='bo_results/blosum_ridge_ucb/highest_uncertainty/high_300_sigma_proteus_blosum_ridge_ucb_3.csv',
+    top_n=300
+)
+analyzer.load_data()
+analyzer.calculate_total_uncertainty()
+analyzer.save_top_binders()
 
 # End of total execution
 print(f"Total execution time: {time.time() - total_start_time:.2f} seconds.")
