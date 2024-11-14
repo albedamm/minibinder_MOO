@@ -1,7 +1,7 @@
 import proteusAI as pai
 import pandas as pd
 import time
-from uncertainty_analysis import UncertaintyAnalyzer 
+from AM_Bsc_2024.src.studentmachine.uncertainty_analysis import UncertaintyAnalyzer 
 
 # Start total execution timer
 total_start_time = time.time()
