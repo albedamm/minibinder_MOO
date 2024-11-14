@@ -14,7 +14,3 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 ## Project Structure
 
 /src: Main source code.
-
-/data: Contains data files used in the project.
-
-/docs: Documentation and research notes.
