@@ -1,14 +1,14 @@
 import proteusAI as pai
 import pandas as pd
 import time
-from AM_Bsc_2024.src.studentmachine.uncertainty_analysis import UncertaintyAnalyzer 
+from uncertainty_analysis import UncertaintyAnalyzer
 
 # Start total execution timer
 total_start_time = time.time()
 
 # Load the dataset
 start_time = time.time()
-df = pd.read_csv('data/blosum_ridge_ucb_pareto_2_dataset.csv')
+df = pd.read_csv('data/data_test.csv')
 print(f"Dataset loaded in {time.time() - start_time:.2f} seconds.")
 
 # Initialize lists for target columns and tasks 
@@ -43,7 +43,7 @@ x_type = 'blosum62'
 for i, y_col in enumerate(y_cols):
     # Create a library and model for each target column
     start_time = time.time()
-    lib = pai.Library(source='data/blosum_ridge_ucb_pareto_2_dataset.csv', names_col='name', seqs_col='binder_seq', y_col=y_col, y_type='num')
+    lib = pai.Library(source='data/data_test.csv', names_col='name', seqs_col='binder_seq', y_col=y_col, y_type='num')
     libraries[y_col] = lib
     model = pai.Model(library=lib, x=x_type, model_type='ridge', k_folds=5)
     models[y_col] = model
@@ -59,7 +59,7 @@ first_model = models[first_y_col]
 # Perform a search for the first target column to find new mutations and their predicted values
 start_time = time.time()
 search_out = first_model.search(optim_problem=first_task, acq_fn='ucb', explore=1.0)
-search_out.to_csv(f'bo_results/proteus_blosum_ridge_ucb_{first_y_col}_pareto_3.csv')
+search_out.to_csv(f'bo_results/{first_y_col}_test.csv')
 print(f"Search completed and results saved in {time.time() - start_time:.2f} seconds.")
 
 # Create a list of predicted proteins (sequences) from the search results
@@ -80,19 +80,20 @@ for y_col in y_cols[1:]:
     print(f"Predictions for {y_col} completed in {time.time() - start_time:.2f} seconds.")
 
 # Save the combined predictions to a CSV file
-final_output_file = 'bo_results/blosum_ridge_ucb/proteus_blosum_ridge_ucb_pareto_3.csv'
+final_output_file = 'bo_results/test_full.csv'
 search_out.to_csv(final_output_file, index=False)
 
 # Analyze the top 300 rows by uncertainty using UncertaintyAnalyzer
 print("Starting uncertainty analysis for the top 300 rows...")
-analyzer = UncertaintyAnalyzer(
+uncertainty_analyzer = UncertaintyAnalyzer(
     input_file=final_output_file,
-    output_file='bo_results/blosum_ridge_ucb/highest_uncertainty/high_300_sigma_proteus_blosum_ridge_ucb_3.csv',
+    output_file='bo_results/test_300.csv',
     top_n=300
 )
-analyzer.load_data()
-analyzer.calculate_total_uncertainty()
-analyzer.save_top_binders()
+uncertainty_analyzer.load_data()
+uncertainty_analyzer.calculate_total_uncertainty()
+uncertainty_analyzer.save_top_binders()
+
 
 # End of total execution
 print(f"Total execution time: {time.time() - total_start_time:.2f} seconds.")
