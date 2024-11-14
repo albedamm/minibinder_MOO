@@ -6,7 +6,7 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 
 ## Technologies Used
 
-- Python
+- [Python](https://github.com/python)
 - [ProteusAI](https://github.com/jonfunk21/ProteusAI/)
 - [BoTorch](https://github.com/pytorch/botorch)
 - [Pandas](https://github.com/pandas-dev/pandas)
