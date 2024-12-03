@@ -1,4 +1,4 @@
-# File to convert a csv file to a fasta file
+# Description: File to convert a .csv file to a .fasta file
 # Convert mutated binders made using the predict script as 
 # fold scripts (gbar) need a fasta file as input
 
