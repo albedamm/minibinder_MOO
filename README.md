@@ -1,4 +1,4 @@
-# AM_Bsc_2024
+# Multi-Objective Optimization of minibinders
 
 ## Overview
 
