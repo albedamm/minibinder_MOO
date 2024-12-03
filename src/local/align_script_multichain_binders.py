@@ -1,19 +1,39 @@
+# Description: Script to align folded binders with inital binder structures
+
 import os
 from pymol import cmd, stored
 
-# Directory containing Structure 1 PDB files
-binder_dir = "data/NLFR_moo/blosum_rf_ucb/pareto_2/new_pareto_blosum_rf_ucb_2_pdb"
+# Directory containing folded mutated binder PDB files
+binder_dir = "results/fold/494_sample/esm2_rf_ucb/uncertainty_3/rank_001_pdb"
 
-# Directory containing Structure 2 PDB files
-target_dir = "data/NLFR_bind_494/binder_pdbs"
+# Directory containing initial binder PDB files
+target_dir = "data/NLFR_partial/1000_pdbs_initial_partial"
 
 # Directory to save the output combined structures
-output_dir = "data/NLFR_moo/blosum_rf_ucb/pareto_2/HLA_B_0801_NLFRRVWEL"
+output_dir = "results/fold/494_sample/esm2_rf_ucb/uncertainty_3/HLA_A_0201_NLFRRVWEV"
 
 def process_structure(binder_path, target_path, output_dir):
-    # Extract full binder name with mutation info without file extension
-    binder_name = os.path.splitext(os.path.basename(binder_path))[0]
-    
+    # Extract binder filename and split into parts
+    binder_filename = os.path.basename(binder_path)
+    parts = binder_filename.split('_')
+
+    # Determine how many parts to use based on mutation count
+    if "unrelaxed" in parts:  # Ensure we don't go past the `unrelaxed` keyword
+        unrelaxed_index = parts.index("unrelaxed")
+        if unrelaxed_index == 3:  # Single mutation case
+            combined_name = "_".join(parts[:3])
+        elif unrelaxed_index == 4:  # Double mutation case
+            combined_name = "_".join(parts[:4])
+        elif unrelaxed_index == 5:  # Triple mutation case
+            combined_name = "_".join(parts[:5])
+        else:
+            raise ValueError("Unexpected filename format for mutations.")
+    else:
+        raise ValueError("Filename does not contain 'unrelaxed' as expected.")
+
+    # Append the target name to the combined name
+    combined_name += "_HLA_A_0201_NLFRRVWEV"
+
     # Reinitialize PyMOL session to clear old data
     cmd.reinitialize()
 
@@ -44,11 +64,10 @@ def process_structure(binder_path, target_path, output_dir):
     cmd.remove("structure1 and chain A")
     cmd.sort()
 
-
     # Create and save the combined structure with mutation info in the filename
-    cmd.create(binder_name, "structure1 or structure2")
-    output_path = os.path.join(output_dir, f"{binder_name}.pdb")
-    cmd.save(output_path, binder_name)
+    output_path = os.path.join(output_dir, f"{combined_name}.pdb")
+    cmd.create(combined_name, "structure1 or structure2")
+    cmd.save(output_path, combined_name)
 
 # Ensure output directory exists
 if not os.path.exists(output_dir):
@@ -59,9 +78,11 @@ for binder_filename in os.listdir(binder_dir):
     if binder_filename.endswith(".pdb"):
         binder_path = os.path.join(binder_dir, binder_filename)
         
-        # Extract the base identifier (e.g., binder_[number])
-        binder_id = binder_filename.split('_')[0] + "_" + binder_filename.split('_')[1]
-        target_filename = f"{binder_id}.pdb"
+        # Extract the binder number
+        binder_number = binder_filename.split('_')[1]
+
+        # Construct the corresponding target file name
+        target_filename = f"binder_{binder_number}.pdb"
         target_path = os.path.join(target_dir, target_filename)
         
         # Check if the corresponding complex file exists
