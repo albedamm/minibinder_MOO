@@ -1,3 +1,7 @@
+# Description: Converts .sc files to .csv files.
+# Convert .sc files made with AF2 inital guess to .csv files
+# .csv files is used for the create_dataset_mod.py script
+
 import csv
 import os
 
@@ -33,5 +37,6 @@ def convert_directory_sc_to_csv(directory):
             convert_sc_to_csv(input_file, output_file)
 
 # Example usage
+# Path to directory with .sc files
 directory = 'data/AF2_init_guess_results'
 convert_directory_sc_to_csv(directory)
