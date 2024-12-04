@@ -1,5 +1,22 @@
 # Multi-Objective Optimization of minibinders
 
+# Table of Contents
+
+1. [Multi-Objective Optimization of minibinders](#multi-objective-optimization-of-minibinders)
+   - [Overview](#overview)
+2. [Technologies Used](#technologies-used)
+3. [Project Structure](#project-structure)
+   - [Source Code (`/src`)](#source-code-src)
+   - [Data (`/data`)](#data-data)
+4. [How to Run the Pipeline](#how-to-run-the-pipeline)
+   - [Initial Binder Design](#initial-binder-design)
+     - [Binder Design Using RFdiffusion](#binder-design-using-rfdiffusion)
+       - [Defining the Input Target](#defining-the-input-target)
+       - [Constraining miBd Length](#constraining-mibd-length)
+     - [Binding Interface Definition](#binding-interface-definition)
+   - [Partial Diffusion](#partial-diffusion)
+
+
 ## Overview
 
 This GitHub serves as a personal archive of our work for our bachelorproject, "Design and Optimization of Multitarget Protein-Protein Binders".
@@ -13,14 +30,10 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 
 ## Project Structure
 
-/src: Main source code.
+/src: Main source code. \\
 /data: Data used in the project.
 
 ## How to run the pipeline
-
-<details>
-
-<summary> Initial binder design </summary>
 
 ### Binder design using RFdiffusion [^1]
 
@@ -61,6 +74,5 @@ Marking Residues as Hotspots:
 
 [^1]: [RFdiffusion GitHub](https://github.com/RosettaCommons/RFdiffusion)
 
-</details>
 
 ### Partial diffusion
