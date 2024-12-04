@@ -6,11 +6,11 @@
    - [Overview](#overview)
 2. [Technologies Used](#technologies-used)
 3. [Project Structure](#project-structure)
-   - [Source Code (`/src`)](#source-code-src)
-   - [Data (`/data`)](#data-data)
 4. [How to Run the Pipeline](#how-to-run-the-pipeline)
-   - [Binder Design Using RFdiffusion](#binder-design-using-rfdiffusion)
-   - [Partial Diffusion](#partial-diffusion)
+   - [Initial binder design](#initial-binder-design)
+     - [Binder Design Using RFdiffusion](#binder-design-using-rfdiffusion)
+     - [Partial Diffusion](#partial-diffusion)
+   - [Cross-reactivity pipeline](#cross-reactivity-pipeline)
 
 
 
@@ -30,7 +30,9 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 `/src`: Main source code.  
 `/data`: Data used in the project.
 
-## How to run the pipeline
+# How to run the pipeline
+
+## Initial binder design
 
 ### Binder design using RFdiffusion [^1]
 
@@ -102,5 +104,28 @@ diffuser.partial_T=20
 ```
 - In this case, 20 noising steps were applied to refine the miBds.
 
+
+## Cross-reactivity pipeline
+
+### Structural Alignment of Minibinders With New Targets
+
+- Align off-target structures with the original target using PyMol v3.0.3 to maintain binding site orientation.
+    - Script used: `src/local/align_script_multichain_target.py`
+    - Script inputs:
+        - Minibinder/target complex `.pdb` file.
+        - Directory containing `.pdb`files for new targets.
+
+### Refold using AF2 [^2]
+
+- Use AlphaFold2 (AF2) inital guess to refold miBds with off-target pMHCs:
+    - Script used: `src/gbar/af2_init.sh`
+    - Script inputs:
+        - `.pdb` file of new minibinder/target complexes.
+
+
+
+
 ## Resources:
 [^1]: [RFdiffusion GitHub](https://github.com/RosettaCommons/RFdiffusion)  
+[^2]: [AF2 inital guess protocol](https://www.nature.com/articles/s41467-023-38328-5)
+  [Protocol GitHub](https://github.com/nrbennet/dl_binder_design)
