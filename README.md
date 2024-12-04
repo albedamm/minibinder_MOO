@@ -127,5 +127,5 @@ diffuser.partial_T=20
 
 ## Resources:
 [^1]: [RFdiffusion GitHub](https://github.com/RosettaCommons/RFdiffusion)  
-[^2]: [AF2 inital guess protocol](https://www.nature.com/articles/s41467-023-38328-5)
-  [Protocol GitHub](https://github.com/nrbennet/dl_binder_design)
+[^2]: [AF2 inital guess protocol](https://www.nature.com/articles/s41467-023-38328-5)  
+      [Protocol GitHub](https://github.com/nrbennet/dl_binder_design)
