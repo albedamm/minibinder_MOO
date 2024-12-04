@@ -1,4 +1,8 @@
 from sklearn.cluster import KMeans
+import pandas as pd
+
+# Load the dataset
+data = pd.read_csv('data/master_dataset_NLFR_1000.csv')
 
 # Extract the column of interest for clustering
 pae_values = data[['pae_interaction_HLA_B_0801_NLFRRVWEL']]
@@ -13,5 +17,5 @@ diverse_sample = data.groupby('cluster').apply(lambda x: x.sample(1)).reset_inde
 # Drop the cluster column and save the diverse dataset
 diverse_sample = diverse_sample.drop(columns=['cluster'])
 
-# Display the dataset to the user
-import ace_tools as tools; tools.display_dataframe_to_user(name="Diverse Dataset of 500 Binders", dataframe=diverse_sample)
+# Save the diverse dataset
+diverse_sample.to_csv('diverse_dataset_NLFR_500.csv', index=False)
