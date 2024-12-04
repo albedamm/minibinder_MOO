@@ -190,11 +190,11 @@ BoTorch Library:
 - This function determines sequences that are not dominated in at least one optimization objective, yielding the set of Pareto-optimal trade-offs.
 
 #### Input Data
-    - The input for this step is a CSV file containing:
-        - Binder Details:
-        - Binder name
-        - Sequence
-        - Predicted ipAE scores for all targets (A, B, C, D, E)
+- The input for this step is a CSV file containing:
+    - Binder Details:
+    - Binder name
+    - Sequence
+    - Predicted ipAE scores for all targets (A, B, C, D, E)
 
 #### Objective Definitions
 - Two types of objectives were defined:
