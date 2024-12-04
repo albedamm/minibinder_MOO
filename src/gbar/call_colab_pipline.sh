@@ -30,7 +30,7 @@
 
 
 # Define the path to the Python file
-PYTHON_FILE="main.py"
+PYTHON_FILE="colabfold.py"
 
 # Check if the Python file exists
 if [[ -f "$PYTHON_FILE" ]]; then
