@@ -13,6 +13,8 @@
    - [Cross-reactivity pipeline](#cross-reactivity-pipeline)
      - [Structural Alignment of Minibinders With New Targets](#structural-alignment-of-minibinders-with-new-targets)
      - [Refold using AF2](#refold-using-af2-2)
+   - [Binder optimization](#binder-optimization)
+     - [Mutation and prediction of binders using ProteusAI](#mutation-and-prediction-of-binders-using-proteusai-3)
 
 
 
@@ -141,6 +143,8 @@ The input is a CSV file containing binder name, sequence and ipAE score for diff
 ```
 df = pd.read_csv('data/NLFR_master_dataset_1000.csv')
 ```
+
+#### Configuration Details
 
 - Specify the type of protein representation:
 ```
