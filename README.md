@@ -30,12 +30,14 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 
 ## Project Structure
 
-/src: Main source code.  
-/data: Data used in the project.
+`/src`: Main source code.  
+`/data`: Data used in the project.
 
 ## How to run the pipeline
 
 ### Binder design using RFdiffusion [^1]
+
+Initial binders were designed using the `src/gbar/RFdiffusion_submit.sh` script.
 
 Defining the Input Target:
 
@@ -72,7 +74,35 @@ Marking Residues as Hotspots:
     - Numbers represent specific residues within the chain.
 
 
-[^1]: [RFdiffusion GitHub](https://github.com/RosettaCommons/RFdiffusion)
 
 
 ### Partial diffusion
+
+Partial diffusion was applied to further optimize the most promising miBds from the RFdiffusion campaign. This process introduces diversity to the initial fold of the miBds by partially noising their backbones and then denoising them.
+
+Partial diffusion was done using the `src/gbar/partial_submit.sh` script.
+
+Input Requirements:
+The input for partial diffusion is the PDB file of the miBd structure in complex with NLFR/HLA-B*08:01, generated using AlphaFold2 (AF2).
+
+Configuration Details
+- Contig Definition:
+    - Use the following configuration for defining the chains:
+    ```
+    contigmap.contigs=[116-116/0 B117-501]
+    ```
+
+    - Breakdown of the contig definition:
+        - `116-116/0`: Represents the miBd chain.
+        - `B117-501`: Represents the target chain (NLFR/HLA-B*08:01 complex).
+
+- Noising Steps:
+
+    - The amount of noising introduced is controlled by the parameter:
+    ```
+    diffuser.partial_T=20
+    ```
+    - In this case, 20 noising steps were applied to refine the miBds.
+
+## Resources:
+[^1]: [RFdiffusion GitHub](https://github.com/RosettaCommons/RFdiffusion)  
