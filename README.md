@@ -132,43 +132,43 @@ diffuser.partial_T=20
 ## Binder optimization 
 ### Mutation and prediction of binders using ProteusAI [^3]
 
-Mutations and predictions were made using 'src/studentmachine/predict.py'
+Mutations and predictions were made using `src/studentmachine/predict.py`
 
 #### Input Requirements:
-The input for the predictions is a CSV file containing binder name, sequence and ipAE score for different targets
+The input is a CSV file containing binder name, sequence and ipAE score for different targets
 
-Defining the input CSV file: 
+- Defining the input CSV file: 
     ```
     df = pd.read_csv('data/NLFR_master_dataset_1000.csv')
     ```
 
-Specify the type of protein representation:
+- Specify the type of protein representation:
     ```
     x_type = 'esm2'
     ```
-- Other options include 'blosum62' and 'ohe'.
+- Other options include `blosum62` and `ohe`.
 
-Creating a library
+- Creating a library
     ```
     lib = pai.Library(source='data/NLFR_master_dataset_1000.csv', names_col='name', seqs_col='binder_seq', y_col=y_col, y_type='num')
     ```
 - Define the column containing the name and sequence
 
-Creating a model from the library:
+- Creating a model from the library:
     ```
     model = pai.Model(library=lib, x=x_type, model_type='ridge', k_folds=5)
     ```
-- model_type: Specifies the model type. Options include 'ridge', 'rf' (Random Forest), and 'gp' (Gaussian Process).
-- k_folds: Defines the number of cross-validation folds for model training.
+- `model_type`: Specifies the surrogate model type. Options include `ridge`, `rf`, and `gp`.
+- `k_folds`: Defines the number of cross-validation folds for model training.
 
-Performing a search on the data from the first column of the input file
+- Performing a search on the data from the first column of the input file
     ```
     search_out = first_model.search(optim_problem=first_task, acq_fn='ucb', explore=1.0) # explore 1.0 will test all mutations
     ```
-- Options for the acquisition function include 'ucb' (Upper Confidence Bound) and 'ei' (Expected Improvement)
-- explore: Defines the level of exploration, if 1 the mutation will be random
+- Options for the acquisition function include `ucb` and `ei` 
+- `explore`: Defines the level of exploration, if 1 the mutation will be random
 
-Performing predictions for the other targets
+- Performing predictions for the other targets
     ```
     val_data, y_val_pred, y_val_sigma, y_val, sorted_acq_score = model.predict(predicted_proteins, acq_fn='ucb')
     ```
