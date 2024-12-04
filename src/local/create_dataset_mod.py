@@ -11,8 +11,8 @@ aa_dict = {
 }
 
 # Directory paths for the csv and pdb files
-csv_dir = 'results/af_init_results/uncertainty/blosum_rf_ucb/round_2'
-pdb_dir = 'data/NLFR_moo/blosum_rf_ucb/uncertainty_2/HLA_B_0801_NLFRRVWEL'
+csv_dir = 'results/af_init_results/25_samples/esm2_rf_ucb/pareto_1'
+pdb_dir = 'results/fold/25_sample/esm2_rf_ucb/pareto_1/HLA_B_0801_NLFRRVWEL'
 
 # Target order for consistent column ordering
 target_order = ['HLA_B_0801_NLFRRVWEL','HLA_B_0801_NLSRRVWEL','HLA_A_2402_NYFRRVWEF','HLA_A_0201_NLFRRVWEV', 'HLA_B_0801' ]
@@ -46,26 +46,41 @@ def build_master_dataset(csv_dir, pdb_dir):
             target_name = "HLA_B_0801_NLFRRVWEL"  # Default
             for target in target_order:
                 if target in csv_file:
-                    target_name = '_'.join(csv_file.split('_')[2:-1])
+                    target_name = '_'.join(csv_file.split('_')[6:])
+                    target_name = target_name.split('.')[0]
+                    print(target_name)
                     break
+
 
             # Read the CSV file
             csv_data = pd.read_csv(os.path.join(csv_dir, csv_file))
             
             for _, row in csv_data.iterrows():
                 description = row['description']
-                # For 1. iteration
-                #binder_nr = description.split('_')[:3]
-                # For 2. iteration
-                binder_nr = description.split('_')[:4]
-                binder_name = '_'.join(binder_nr)
+                    # Construct combined name based on binder mutations
+                parts = description.split('_')
+                if "HLA" in parts:  # Ensure we don't go past the `unrelaxed` keyword
+                    hla_index = parts.index("HLA")
+                    if hla_index == 3:  # Single mutation case
+                        binder_name = "_".join(parts[:3])
+                    elif hla_index == 4:  # Double mutation case
+                        binder_name = "_".join(parts[:4])
+                    elif hla_index == 5:  # Triple mutation case
+                        binder_name = "_".join(parts[:5])
+                    else:
+                        raise ValueError("Unexpected filename format for mutations.")
+                else:
+                    raise ValueError("Filename does not contain 'HLA' as expected.")
+
                 pae_interaction = row['pae_interaction']
                 plddt_binder = row['plddt_binder']
 
                 # Set up PDB file name with default `pdb_name`
-                pdb_name = '_'.join(description.split('_')[:4])
-                pdb_file = f"{pdb_name}_HLA_B_0801_NLFRRVWEL.pdb"
+                #pdb_name = '_'.join(description.split('_')[:3])
+                #print(pdb_name)
+                pdb_file = f"{binder_name}_HLA_B_0801_NLFRRVWEL.pdb"
                 pdb_path = os.path.join(pdb_dir, pdb_file)
+                #print(pdb_path)
 
                 if os.path.exists(pdb_path):
                     chain_A_seq = parse_pdb(pdb_path)
@@ -86,6 +101,7 @@ def build_master_dataset(csv_dir, pdb_dir):
 
     # Convert the master data to a DataFrame
     master_df = pd.DataFrame(master_data)
+    print(master_df.head())
 
     # Sort the DataFrame by the PAE interaction score for HLA_B_0801_NLFRRVWEL in ascending order
     master_df = master_df.sort_values(by='pae_interaction_HLA_B_0801_NLFRRVWEL', ascending=True)
@@ -107,6 +123,6 @@ def build_master_dataset(csv_dir, pdb_dir):
 
 # Build and save the master dataset
 master_dataset = build_master_dataset(csv_dir, pdb_dir)
-output_csv_path = 'data/NLFR_moo/blosum_rf_ucb/uncertainty_2/blosum_rf_ucb_uncertainty_2_dataset.csv'
+output_csv_path = 'data/NLFR_moo/25_samples/esm2_rf_ucb/pareto_1/proteus_25_esm2_rf_ucb_pareto_1.csv'
 master_dataset.to_csv(output_csv_path, index=False)
 print(f"Master dataset saved to {output_csv_path}")
