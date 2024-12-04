@@ -11,10 +11,8 @@
 4. [How to Run the Pipeline](#how-to-run-the-pipeline)
    - [Initial Binder Design](#initial-binder-design)
      - [Binder Design Using RFdiffusion](#binder-design-using-rfdiffusion)
-       - [Defining the Input Target](#defining-the-input-target)
-       - [Constraining miBd Length](#constraining-mibd-length)
-     - [Binding Interface Definition](#binding-interface-definition)
      - [Partial Diffusion](#partial-diffusion)
+
 
 
 ## Overview
@@ -35,18 +33,18 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 
 ## How to run the pipeline
 
-#### Binder design using RFdiffusion [^1]
+### Binder design using RFdiffusion [^1]
 
 Initial binders were designed using the `src/gbar/RFdiffusion_submit.sh` script.
 
-Defining the Input Target:
+#### Defining the Input Target:
 
 - The predicted pMHC complex structure is provided as the input target using the parameter:
     ```
     inference.input_pdb=NLFR_complex.pdb
     ```
 
-Constraining miBd Length:
+#### Constraining miBd Length:
 
 - The designed miBds are constrained to a length between 100 and 150 residues using:
     ```
@@ -82,7 +80,7 @@ Partial diffusion was applied to further optimize the most promising miBds from 
 
 Partial diffusion was done using the `src/gbar/partial_submit.sh` script.
 
-Input Requirements:
+#### Input Requirements:
 The input for partial diffusion is the PDB file of the miBd structure in complex with NLFR/HLA-B*08:01, generated using AlphaFold2 (AF2).
 
 #### Configuration Details
