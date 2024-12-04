@@ -128,7 +128,6 @@ diffuser.partial_T=20
     - Script inputs:
         - `.pdb` file of new minibinder/target complexes.
 
-</details>
 
 
 ## Resources:
