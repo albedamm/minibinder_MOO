@@ -227,6 +227,7 @@ To fold the mutated sequences, four different scripts are used:
 - `src/gbar/call_colab_pipeline.sh`
 - `src/gbar/colabfold.py`
 - `src/gbar/main.py`
+
 Do not change `src/gbar/main.py` and `src/gbar/run_colabfold.sh` scripts
 
 #### Configuration details
