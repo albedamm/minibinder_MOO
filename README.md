@@ -18,7 +18,11 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 
 ## How to run the pipeline
 
-### Initial design of minibinders [^1]
+<details>
+
+<summary> Initial binder design </summary>
+
+### Binder design using RFdiffusion [^1]
 
 Defining the Input Target:
 
@@ -56,3 +60,7 @@ Marking Residues as Hotspots:
 
 
 [^1]: [RFdiffusion GitHub](https://github.com/RosettaCommons/RFdiffusion)
+
+</details>
+
+### Partial diffusion
