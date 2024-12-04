@@ -14,3 +14,8 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 ## Project Structure
 
 /src: Main source code.
+/data: Data used in the project.
+
+## How to run pipeline
+
+
