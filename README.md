@@ -14,7 +14,7 @@
        - [Defining the Input Target](#defining-the-input-target)
        - [Constraining miBd Length](#constraining-mibd-length)
      - [Binding Interface Definition](#binding-interface-definition)
-   - [Partial Diffusion](#partial-diffusion)
+     - [Partial Diffusion](#partial-diffusion)
 
 
 ## Overview
