@@ -9,9 +9,8 @@
    - [Source Code (`/src`)](#source-code-src)
    - [Data (`/data`)](#data-data)
 4. [How to Run the Pipeline](#how-to-run-the-pipeline)
-   - [Initial Binder Design](#initial-binder-design)
-     - [Binder Design Using RFdiffusion](#binder-design-using-rfdiffusion)
-     - [Partial Diffusion](#partial-diffusion)
+   - [Binder Design Using RFdiffusion](#binder-design-using-rfdiffusion)
+   - [Partial Diffusion](#partial-diffusion)
 
 
 

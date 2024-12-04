@@ -1,0 +1,8 @@
+## Mutation and predictions 
+
+Mutations and predictions were made using 'src/studentmachine/predict.py'
+
+Defining the input CSV file: 
+    ```
+    df = pd.read_csv('data/NLFR_master_dataset_1000.csv')
+    ```
