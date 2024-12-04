@@ -61,7 +61,7 @@ cd $WORKING_DIR
 # RFdiffusion 
 START_TIME=$(date +%s)
 module load RFdiffusion
-run_inference.py inference.input_pdb=${BASE_DIR}/input_pdb.pdb inference.output_prefix=${RFDIFFUSION_DIR}/$RUN_ID inference.num_designs=50 'contigmap.contigs=[A1-276/0 B1-100/0 C1-9/0 100-150]' 'ppi.hotspot_res=[C1,C2,C3,C4,C5,C6,C7,C8,C9]' denoiser.noise_scale_ca=0 denoiser.noise_scale_frame=0
+run_inference.py inference.input_pdb=${BASE_DIR}/complex.pdb inference.output_prefix=${RFDIFFUSION_DIR}/$RUN_ID inference.num_designs=50 'contigmap.contigs=[A1-276/0 B1-100/0 C1-9/0 100-150]' 'ppi.hotspot_res=[C1,C2,C3,C4,C5,C6,C7,C8,C9]' denoiser.noise_scale_ca=0 denoiser.noise_scale_frame=0
 
 # traj dir was so far not needed and is removed to save space
 rm -rf ${RFDIFFUSION_DIR}/traj

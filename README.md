@@ -16,8 +16,36 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 /src: Main source code.
 /data: Data used in the project.
 
-## How to run pipeline
+## How to run the pipeline
 
 ### Initial design of minibinders
+
+Defining the Input Target:
+
+- The predicted pMHC complex structure is provided as the input target using the parameter:
+    'inference.input_pdb=NLFR_complex.pdb'
+
+Constraining miBd Length:
+
+- The designed miBds are constrained to a length between 100 and 150 residues using:
+    'contigmap.contigs=[A1-276/0 B1-100/0 C1-9/0 100-150]'
+
+- Breakdown of the contig definition:
+    - 'A1-276/0': Represents the HLA class I chain.
+    - 'B1-100/0': Represents the Beta-2-microglobulin.
+    - 'C1-9/0': Represents the target peptide.
+    - '100-150': Defines the miBd chain length constraint.
+    - Chain breaks are indicated using '/0'.
+
+### Binding Interface Definition
+
+Marking Residues as Hotspots:
+
+- To define the binding interface, the residues of the NLFR peptide are marked as hotspots using:
+    'ppi.hotspot_res=[C1,C2,C3,C4,C5,C6,C7,C8,C9]'
+
+- Explanation:
+    - 'C' refers to the peptide chain.
+    - Numbers represent specific residues within the chain.
 
 
