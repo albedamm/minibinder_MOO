@@ -8,9 +8,11 @@
 3. [Project Structure](#project-structure)
 4. [How to Run the Pipeline](#how-to-run-the-pipeline)
    - [Initial binder design](#initial-binder-design)
-     - [Binder Design Using RFdiffusion](#binder-design-using-rfdiffusion)
+     - [Binder Design Using RFdiffusion](#binder-design-using-rfdiffusion-1)
      - [Partial Diffusion](#partial-diffusion)
    - [Cross-reactivity pipeline](#cross-reactivity-pipeline)
+     - [Structural Alignment of Minibinders With New Targets](#structural-alignment-of-minibinders-with-new-targets)
+     - [Refold using AF2](#refold-using-af2-2)
 
 
 
@@ -34,9 +36,6 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 
 ## Initial binder design
 
-<details>
-
-<summary> RFdiffusion binder design </summary>
 
 ### Binder design using RFdiffusion [^1]
 
@@ -76,12 +75,8 @@ Marking Residues as Hotspots:
     - `C` refers to the peptide chain.
     - Numbers represent specific residues within the chain.
 
-</details>
 
 
-<details>
-
-<summary> Partial diffusion </summary>
 
 ### Optimizing binders using partial diffusion
 
@@ -112,14 +107,10 @@ diffuser.partial_T=20
 ```
 - In this case, 20 noising steps were applied to refine the miBds.
 
-</details>
 
 
 ## Cross-reactivity pipeline
 
-<details>
-
-<summary> Target alignment </summary>
 
 ### Structural Alignment of Minibinders With New Targets
 
@@ -129,11 +120,6 @@ diffuser.partial_T=20
         - Minibinder/target complex `.pdb` file.
         - Directory containing `.pdb`files for new targets.
 
-</details>
-
-<details>
-
-<summary> AF2 refolding </summary>
 
 ### Refold using AF2 [^2]
 

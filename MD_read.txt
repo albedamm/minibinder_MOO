@@ -22,3 +22,8 @@ Creating a library
     ```
 - Define the column containing the name and sequence
 
+Creating a model from the library:
+    ```
+    model = pai.Model(library=lib, x=x_type, model_type='ridge', k_folds=5)
+    ```
+- The surrogate model is defined. Other options is 'rf' and 'gp'. The number of k-folds used is defined
