@@ -2,7 +2,23 @@
 
 Mutations and predictions were made using 'src/studentmachine/predict.py'
 
+#### Input Requirements:
+The input require a CSV file containing binder name, sequence and ipAE score for different targets
+
 Defining the input CSV file: 
     ```
     df = pd.read_csv('data/NLFR_master_dataset_1000.csv')
     ```
+
+Define the protein representation type:
+    ```
+    x_type = 'esm2'
+    ```
+- It could also be 'blosum62' or 'ohe'
+
+Creating a library
+    ```
+    lib = pai.Library(source='data/NLFR_master_dataset_1000.csv', names_col='name', seqs_col='binder_seq', y_col=y_col, y_type='num')
+    ```
+- Define the column containing the name and sequence
+

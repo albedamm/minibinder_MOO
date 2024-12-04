@@ -34,6 +34,10 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 
 ## Initial binder design
 
+<details>
+
+<summary> RFdiffusion binder design </summary>
+
 ### Binder design using RFdiffusion [^1]
 
 Initial binders were designed using the `src/gbar/RFdiffusion_submit.sh` script.
@@ -72,10 +76,14 @@ Marking Residues as Hotspots:
     - `C` refers to the peptide chain.
     - Numbers represent specific residues within the chain.
 
+</details>
 
 
+<details>
 
-### Partial diffusion
+<summary> Partial diffusion </summary>
+
+### Optimizing binders using partial diffusion
 
 Partial diffusion was applied to further optimize the most promising miBds from the RFdiffusion campaign. This process introduces diversity to the initial fold of the miBds by partially noising their backbones and then denoising them.
 
@@ -103,6 +111,8 @@ The input for partial diffusion is the PDB file of the miBd structure in complex
 diffuser.partial_T=20
 ```
 - In this case, 20 noising steps were applied to refine the miBds.
+
+</details>
 
 
 ## Cross-reactivity pipeline
