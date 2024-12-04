@@ -15,7 +15,8 @@
      - [Refold using AF2](#refold-using-af2-2)
    - [Binder optimization](#binder-optimization)
      - [Mutation and prediction of binders using ProteusAI](#mutation-and-prediction-of-binders-using-proteusai-3)
-   - [Computing the Pareto front]()
+     - [Computing the Pareto front](#computing-the-pareto-front)
+     - [Folding mutated sequences](#folding-mutated-sequences)
 
 
 
