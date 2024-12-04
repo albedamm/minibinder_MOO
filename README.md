@@ -18,4 +18,6 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 
 ## How to run pipeline
 
+### Initial design of minibinders
+
 
