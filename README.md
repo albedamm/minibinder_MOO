@@ -15,6 +15,7 @@
      - [Refold using AF2](#refold-using-af2-2)
    - [Binder optimization](#binder-optimization)
      - [Mutation and prediction of binders using ProteusAI](#mutation-and-prediction-of-binders-using-proteusai-3)
+   - [Computing the Pareto front]()
 
 
 
@@ -177,6 +178,47 @@ search_out = first_model.search(optim_problem=first_task, acq_fn='ucb', explore=
 val_data, y_val_pred, y_val_sigma, y_val, sorted_acq_score = model.predict(predicted_proteins, acq_fn='ucb')
 ```
 - Same acquisition function as used in the search step.
+
+
+### Computing the Pareto front
+
+The Pareto front was computed using `src/studentmachine/pareto_analysis.py`
+
+#### Tools and Functions Used
+BoTorch Library:
+- The `is_non_dominated` function from `botorch.utils.multi_objective.pareto` was used to identify Pareto-optimal sequences.
+- This function determines sequences that are not dominated in at least one optimization objective, yielding the set of Pareto-optimal trade-offs.
+
+#### Input Data
+    - The input for this step is a CSV file containing:
+        - Binder Details:
+        - Binder name
+        - Sequence
+        - Predicted ipAE scores for all targets (A, B, C, D, E)
+
+#### Objective Definitions
+- Two types of objectives were defined:
+    - Minimization Objective:
+        - Minimize the ipAE score for target A to enhance specificity.
+    - Maximization Objectives:
+        - Maximize ipAE scores for off-targets B, C, D, and E to reduce cross-reactivity.
+```
+for i in range(len(old_pAE_cols)):
+    # Prepare objectives
+    objectives = torch.tensor(df_old[old_pAE_cols].values, dtype=torch.float32)
+    
+    objectives[:, 0] *= -1
+    
+    if i != 0:
+        objectives[:, i] *= 1
+
+    # Find Pareto optimal points for the current main objective
+    pareto_mask = is_non_dominated(objectives)
+    pareto_indices_sets.append(set(np.where(pareto_mask.numpy())[0]))
+```
+
+- The ipAE scores for target A were negated to adapt to the is_non_dominated function’s default assumption of maximization.
+- The ipAE scores for off-targets B, C, D, and E were left unchanged.
 
 
 
