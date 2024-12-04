@@ -18,7 +18,7 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 
 ## How to run the pipeline
 
-### Initial design of minibinders
+### Initial design of minibinders [1^]
 
 Defining the Input Target:
 
@@ -55,3 +55,4 @@ Marking Residues as Hotspots:
     - Numbers represent specific residues within the chain.
 
 
+[^1]: [RFdiffusion GitHub](https://github.com/RosettaCommons/RFdiffusion)
