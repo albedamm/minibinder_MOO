@@ -40,3 +40,5 @@ Performing predictions for the other targets
     val_data, y_val_pred, y_val_sigma, y_val, sorted_acq_score = model.predict(predicted_proteins, acq_fn='ucb')
     ```
 - Same acquisition function as used in the search step.
+
+

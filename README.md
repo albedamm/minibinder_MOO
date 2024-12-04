@@ -221,6 +221,37 @@ for i in range(len(old_pAE_cols)):
 - The ipAE scores for off-targets B, C, D, and E were left unchanged.
 
 
+### Folding mutated sequences
+To fold the mutated sequences, four different scripts are used:
+- `src/gbar/run_colabfold.sh`
+- `src/gbar/call_colab_pipeline.sh`
+- `src/gbar/colabfold.py`
+- `src/gbar/main.py`
+Do not change `src/gbar/main.py` and `src/gbar/run_colabfold.sh` scripts
+
+#### Configuration details
+The input for the `src/gbar/colabfold.py` has to be a .fasta file containing the binder name and sequence
+
+Define the input and output directories:
+```
+input_fasta_dir = "path/to/input/fasta"
+output_base_dir = "path/to/output/directory"
+```
+
+The colab pipline is called using the `src/gbar/call_colab_pipeline.sh`. 
+- The jobname and name of the error files need to be changed
+   ```
+   ### -- set the job Name --
+   #BSUB -J Job_name 
+   ```
+   ```
+   ### -- Specify the output and error file. %J is the job-id --
+   ### -- -o and -e mean append, -oo and -eo mean overwrite --
+   #BSUB -o std/job_name_%J.out
+   #BSUB -e std/job_name_%J.err
+   ```
+
+
 
 ## Resources:
 [^1]: [RFdiffusion GitHub](https://github.com/RosettaCommons/RFdiffusion)  
