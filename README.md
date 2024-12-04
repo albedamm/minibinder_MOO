@@ -18,7 +18,7 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 
 ## How to run the pipeline
 
-### Initial design of minibinders [1^]
+### Initial design of minibinders [^1]
 
 Defining the Input Target:
 
