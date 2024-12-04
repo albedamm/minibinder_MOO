@@ -23,7 +23,9 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 Defining the Input Target:
 
 - The predicted pMHC complex structure is provided as the input target using the parameter:
-    'inference.input_pdb=NLFR_complex.pdb'
+    ```
+    inference.input_pdb=NLFR_complex.pdb
+    ```
 
 Constraining miBd Length:
 
