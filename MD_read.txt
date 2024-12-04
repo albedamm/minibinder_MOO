@@ -10,11 +10,11 @@ Defining the input CSV file:
     df = pd.read_csv('data/NLFR_master_dataset_1000.csv')
     ```
 
-Define the protein representation type:
+Specify the type of protein representation:
     ```
     x_type = 'esm2'
     ```
-- It could also be 'blosum62' or 'ohe'
+- Other options include 'blosum62' and 'ohe'.
 
 Creating a library
     ```
@@ -26,10 +26,17 @@ Creating a model from the library:
     ```
     model = pai.Model(library=lib, x=x_type, model_type='ridge', k_folds=5)
     ```
-- The surrogate model is defined. Other options is 'rf' and 'gp'. The number of k-folds used is defined
+- model_type: Specifies the model type. Options include 'ridge', 'rf' (Random Forest), and 'gp' (Gaussian Process).
+- k_folds: Defines the number of cross-validation folds for model training.
 
 Performing a search on the data from the first column of the input file
     ```
     search_out = first_model.search(optim_problem=first_task, acq_fn='ucb', explore=1.0) # explore 1.0 will test all mutations
     ```
-- The acquisition function is chosen between 'ei' and 'ucb'
+- Options for the acquisition function include 'ucb' (Upper Confidence Bound) and 'ei' (Expected Improvement)
+
+Performing predictions for the other targets
+    ```
+    val_data, y_val_pred, y_val_sigma, y_val, sorted_acq_score = model.predict(predicted_proteins, acq_fn='ucb')
+    ```
+- Same acquisition function as used in the search step.
