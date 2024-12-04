@@ -27,3 +27,9 @@ Creating a model from the library:
     model = pai.Model(library=lib, x=x_type, model_type='ridge', k_folds=5)
     ```
 - The surrogate model is defined. Other options is 'rf' and 'gp'. The number of k-folds used is defined
+
+Performing a search on the data from the first column of the input file
+    ```
+    search_out = first_model.search(optim_problem=first_task, acq_fn='ucb', explore=1.0) # explore 1.0 will test all mutations
+    ```
+- The acquisition function is chosen between 'ei' and 'ucb'

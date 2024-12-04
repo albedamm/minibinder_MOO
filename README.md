@@ -78,7 +78,7 @@ Marking Residues as Hotspots:
 
 
 
-### Optimizing binders using partial diffusion
+### Partial diffusion
 
 Partial diffusion was applied to further optimize the most promising miBds from the RFdiffusion campaign. This process introduces diversity to the initial fold of the miBds by partially noising their backbones and then denoising them.
 
