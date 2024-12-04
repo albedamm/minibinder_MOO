@@ -117,6 +117,10 @@ diffuser.partial_T=20
 
 ## Cross-reactivity pipeline
 
+<details>
+
+<summary> Target alignment </summary>
+
 ### Structural Alignment of Minibinders With New Targets
 
 - Align off-target structures with the original target using PyMol v3.0.3 to maintain binding site orientation.
@@ -125,6 +129,12 @@ diffuser.partial_T=20
         - Minibinder/target complex `.pdb` file.
         - Directory containing `.pdb`files for new targets.
 
+</details>
+
+<details>
+
+<summary> AF2 refolding </summary>
+
 ### Refold using AF2 [^2]
 
 - Use AlphaFold2 (AF2) inital guess to refold miBds with off-target pMHCs:
@@ -132,7 +142,7 @@ diffuser.partial_T=20
     - Script inputs:
         - `.pdb` file of new minibinder/target complexes.
 
-
+</details>
 
 
 ## Resources:
