@@ -34,9 +34,10 @@ This GitHub serves as a personal archive of our work for our bachelorproject, "D
 ## Project Structure
 
 `/src`: Main source code.  
-`/data`: Data used in the project.
 
-# How to run the pipeline
+For access to data contact s215067@dtu.dk or s215063@dtu.dk
+
+# How to run the pipeline 
 
 ## Initial binder design
 
@@ -253,21 +254,6 @@ The colab pipline is called using the `src/gbar/call_colab_pipeline.sh`.
    #BSUB -e std/job_name_%J.err
    ```
 
-
-### Structural alignment of minibinders with initial minibinder-target complex
-
-- Align folded minibinder structures with the original minibinders using PyMol v3.0.3 to maintain binding site orientation.
-    - Script used: `src/local/align_script_multichain_binder.py`
-    - Script inputs:
-        - Directory containing folded minibinder `.pdb` files
-        - Directory containing initial `.pdb` files.
-        - Output directory for new minibinder-target complex `.pdb` files
-
-### Structural alignmenf of minibinders with new targets
-- Then the `.pdb` needs to be aligned with the other targets as described before
-
-### Refold using AF2 [^2]
-- Refolding minibinder complexes with AF2 initial guess as described earlier
 
 
 ## Resources:
